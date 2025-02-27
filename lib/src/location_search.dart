@@ -83,6 +83,7 @@ class LocationSearchWidget extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? searchStyle;
   final TextStyle? listStyle;
+  final TextStyle? locationButtonStyle;
 
   const LocationSearchWidget({
     super.key,
@@ -102,6 +103,7 @@ class LocationSearchWidget extends StatefulWidget {
     this.hintStyle,
     this.searchStyle,
     this.listStyle,
+    this.locationButtonStyle,
     Widget? loadingWidget,
   }) : loadingWidget = loadingWidget ?? const CircularProgressIndicator();
 
@@ -464,7 +466,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
         ),
         title: Text(
           widget.currentPositionButtonText,
-          style: TextStyle(
+          style: widget.locationButtonStyle ?? TextStyle(
             color: widget.searchBarTextColor,
             fontSize: 16,
             fontWeight: FontWeight.w500,
