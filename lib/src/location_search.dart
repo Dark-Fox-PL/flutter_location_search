@@ -80,6 +80,10 @@ class LocationSearchWidget extends StatefulWidget {
 
   final int historyMaxLength;
 
+  final TextStyle? hintStyle;
+  final TextStyle? searchStyle;
+  final TextStyle? listStyle;
+
   const LocationSearchWidget({
     super.key,
     required this.onPicked,
@@ -95,6 +99,9 @@ class LocationSearchWidget extends StatefulWidget {
     this.iconColor = Colors.grey,
     this.mode = Mode.fullscreen,
     this.historyMaxLength = 5,
+    this.hintStyle,
+    this.searchStyle,
+    this.listStyle,
     Widget? loadingWidget,
   }) : loadingWidget = loadingWidget ?? const CircularProgressIndicator();
 
@@ -313,11 +320,11 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
 
         return ListTile(
           leading: isHistory
-              ? Icon(
-                  Icons.watch_later_outlined,
-                  color: widget.iconColor,
-                )
-              : null,
+            ? Icon(
+                Icons.watch_later_outlined,
+                color: widget.iconColor,
+              )
+            : null,
           trailing: Icon(
             Icons.chevron_right,
             color: widget.iconColor,
@@ -325,7 +332,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
           ),
           title: Text(
             item.address,
-            style: TextStyle(
+            style: widget.listStyle ?? TextStyle(
               color: widget.searchBarTextColor,
             ),
           ),
@@ -360,7 +367,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
             textDirection: isRTL(_searchController.text)
                 ? TextDirection.rtl
                 : TextDirection.ltr,
-            style: TextStyle(color: widget.searchBarTextColor),
+            style: widget.searchStyle ?? TextStyle(color: widget.searchBarTextColor),
             controller: _searchController,
             focusNode: _focusNode,
             decoration: InputDecoration(
@@ -376,7 +383,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide.none,
               ),
-              hintStyle: TextStyle(color: widget.searchBarHintColor),
+              hintStyle: widget.hintStyle ?? TextStyle(color: widget.searchBarHintColor),
               suffixIcon: IconButton(
                 onPressed: _searchController.clear,
                 icon: Icon(
